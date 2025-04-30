@@ -12,8 +12,8 @@ class ColaPI:
         for i in range (self.index - 1):
             self.elementos[i] = self.elementos[i +1]
 
-        self.elementos.pop()
         self.index -= 1
+        return self.elementos.pop()
         
     def primero(self): 
         return self.elementos[0]
