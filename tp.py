@@ -51,4 +51,49 @@ c2.acolar(3)
 c1.acolar(5)
 c2.acolar(4)
 
-print(elementos_finales(c1,c2))
+#3
+def copiar(cola):
+    copia = ColaPI()
+    aux = ColaPI()
+
+    while not cola.colaVacia():
+        aux.acolar(cola.desacolar())
+    
+    while not aux.colaVacia():
+        copia.acolar(aux.desacolar())
+    
+    cola = copia
+    
+    return copia
+
+def invertir_cola(cola):
+    copia = copiar(cola)
+    inversa = ColaPI()
+    pilaaux = Pila()
+
+    while not copia.colaVacia():
+        pilaaux.apilar(copia.desacolar())
+    
+    while not pilaaux.pilaVacia():
+        inversa.acolar(pilaaux.desapilar())
+    
+    return inversa
+
+def colas_iguales(c1, c2):
+    if c1.index != c2.index:
+        return False
+    for a, b in zip(c1.elementos, c2.elementos):
+        if a != b:
+            return False
+    return True
+
+def son_inversas(c1, c2):
+    return colas_iguales(invertir_cola(c1), c2)
+
+
+c3 = ColaPI()
+c3.acolar(5)
+c3.acolar(2)
+c3.acolar(1)
+
+print(son_inversas(c1,c3))
