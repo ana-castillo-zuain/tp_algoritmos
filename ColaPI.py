@@ -9,11 +9,10 @@ class ColaPI:
         return datos 
     
     def desacolar(self): 
-        for i in range (self.index - 1):
-            self.elementos[i] = self.elementos[i +1]
-
+        popi = self.elementos.pop(0)
         self.index -= 1
-        return self.elementos.pop()
+        return popi
+
         
     def primero(self): 
         return self.elementos[0]
