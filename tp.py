@@ -1,6 +1,6 @@
 from PilaTF import Pila
 from ColaPI import ColaPI
-
+from ColaPrioridad import ColaPrioridad
 #1
 def copiar_pila(pila_origen):
     pila_copia = Pila()
@@ -51,6 +51,7 @@ c2.acolar(3)
 c1.acolar(5)
 c2.acolar(4)
 
+print(elementos_finales(c1,c2))
 #3
 def copiar(cola):
     copia = ColaPI()
@@ -93,4 +94,43 @@ c3.acolar(5)
 c3.acolar(2)
 c3.acolar(1)
 
-print(son_inversas(c4, c3))  # Esto ahora debería imprimir: True
+print(son_inversas(c4, c3)) 
+
+#Opcion 1
+
+Salas = {'PA' : 'Sala 1', 'PB' : 'Sala 2', 'JA' : 'Sala 3', 'JB': 'Sala 4',
+         'MA': 'Sala 5', 'MB': 'Sala 6'}
+Filas = {'PA' : ColaPrioridad(), 'PB' : ColaPrioridad(), 'JA' : ColaPrioridad(), 
+         'JB': ColaPrioridad(), 'MA': ColaPrioridad(), 'MB': ColaPrioridad()}
+Contadores = {'PA' : 1, 'PB' : 1, 'JA' : 1, 'JB': 1,
+         'MA': 1, 'MB': 1}
+
+def ingresar_turno(tipo, prioridad):
+    ticket = f'{tipo}{Contadores[tipo]:03d}'
+    Filas[tipo].acolarPrioridad(ticket,prioridad)
+    Contadores[tipo] += 1
+    print('Turno Ingresado ' + ticket)
+
+def mostrar_turnos():
+    print('\nTurnos Programados')
+    for tipo, cola in Filas.items():
+        print('\nTipo: ' + (tipo) + ' | Sala asignada: '+ (Salas[tipo]))
+        while not cola.colaVacia():
+            turno = cola.primero()
+            print('Turno:'+ (turno))
+            cola.desacolar()
+
+ejemplos = [
+        ("PA", 1), ("PA", 0), ("PA", 1),
+        ("PB", 0), ("PB", 1), ("PB", 0),
+        ("JA", 1), ("JA", 1), ("JA", 0),
+        ("JB", 0), ("JB", 0), ("JB", 1),
+        ("MA", 0), ("MA", 1), ("MA", 1),
+        ("MB", 0), ("MB", 1), ("MB", 0),
+    ]
+
+for tipo, prioridad in ejemplos:
+    ingresar_turno(tipo, prioridad)
+
+mostrar_turnos()
+

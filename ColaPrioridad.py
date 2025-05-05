@@ -18,7 +18,7 @@ class ColaPrioridad:
                 self.elementos[i] = self.elementos[i - 1]
                 i-= 1
             
-            self.elementos[i] = self.Elemento(°)
+            self.elementos[i] = self.Elemento()
             self.elementos[i].valor = x
             self.elementos[i].prioridad = prioridad
         else:
