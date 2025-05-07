@@ -1,6 +1,7 @@
 from PilaTF import Pila
 from ColaPI import ColaPI
 from ColaPrioridad import ColaPrioridad
+
 #1
 def copiar_pila(pila_origen):
     pila_copia = Pila()
@@ -30,6 +31,13 @@ def promedio_pila(pila):
         return None
     return sumar_elementos_pila(pila) / contar_elementos_pila(pila)
 
+pi = Pila()
+pi.apilar(2)
+pi.apilar(3)
+pi.apilar(4)
+
+print(promedio_pila(pi))
+
 #2
 def elementos_finales(cola1, cola2):
     elem1 = None
@@ -52,6 +60,7 @@ c1.acolar(5)
 c2.acolar(4)
 
 print(elementos_finales(c1,c2))
+
 #3
 def copiar(cola):
     copia = ColaPI()
@@ -84,6 +93,7 @@ def colas_iguales(c1, c2):
 def son_inversas(c1, c2):
     return colas_iguales(invertir_cola(c1), c2)
 
+#Ejemplo 1 -> True
 c4 = ColaPI()
 c4.acolar(1)
 c4.acolar(2)
@@ -95,6 +105,20 @@ c3.acolar(2)
 c3.acolar(1)
 
 print(son_inversas(c4, c3)) 
+
+#Ejemplo 1 -> False
+
+ca = ColaPI()
+ca.acolar(1)
+ca.acolar(2)
+ca.acolar(5)
+
+cb = ColaPI()
+cb.acolar(6)
+cb.acolar(2)
+cb.acolar(1)
+
+print(son_inversas(ca, cb)) 
 
 #EJERCICIO 4 -> Determinar si dos Colas con prioridad son idénticas.
 from ColaPrioridad import ColaPrioridad
