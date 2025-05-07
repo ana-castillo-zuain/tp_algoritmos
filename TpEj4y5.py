@@ -80,11 +80,18 @@ print("¿Son idénticas?: ", "Ejemplo 1: ",colas_prioridad_iguales(cp1, cp2), "E
 
 from PilaTF import Pila
 
+#Definimos la funcion, auxiliar: pila temporal donde guardamos los elementos no repetidos.
+# vistos: conjunto (set) para registrar elementos que ya aparecieron.
+
 def eliminar_duplicados_pila(pila: Pila):
     auxiliar = Pila()
     vistos = set()
 
-    # Paso 1: desapilar y guardar no repetidos
+#Recorremos la pila
+#Sacamos uno por uno los elementos de la pila original (desde el tope).
+#Si  no fue visto, lo apilamos en la auxiliar y lo registramos como "visto".
+#Esto elimina duplicados conservando el primero que se agregó a la pila (es decir, el que está más abajo).
+
     while not pila.pilaVacia():
         dato = pila.tope()
         pila.desapilar()
@@ -92,12 +99,16 @@ def eliminar_duplicados_pila(pila: Pila):
             vistos.add(dato)
             auxiliar.apilar(dato)
 
-    # Paso 2: revertir el orden en la pila original
+#Restauramos el orden original, Invertimos auxiliar usando otra pila restaurador, para dejar los elementos en orden original.
     restaurador = Pila()
     while not auxiliar.pilaVacia():
         dato = auxiliar.tope()
         auxiliar.desapilar()
         restaurador.apilar(dato)
+
+#Volvemos a caragar la pila original
+#Finalmente, vaciamos restaurador hacia la pila original. Ahora pila tiene:
+#Elementos sin duplicados. En el mismo orden que originalmente ingresaron.
 
     while not restaurador.pilaVacia():
         dato = restaurador.tope()
@@ -111,7 +122,7 @@ for valor in [1, 2, 3, 2, 4, 3, 5]:
 
 eliminar_duplicados_pila(p)
 
-# Mostrar resultado desde el tope
+# Mostrar resultado: 
 while not p.pilaVacia():
     print(p.tope())
     p.desapilar()
