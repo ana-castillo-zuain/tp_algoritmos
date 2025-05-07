@@ -2,6 +2,7 @@ from PilaTF import Pila
 from ColaPI import ColaPI
 from ColaPrioridad import ColaPrioridad
 
+from Conjunto import Conjunto
 #1
 def copiar_pila(pila_origen):
     pila_copia = Pila()
@@ -249,6 +250,53 @@ while not p.pilaVacia():
     print(p.tope())
     p.desapilar()
 
+
+
+#EJERCICIO 8
+from Conjunto import Conjunto
+
+def cantidadElementos(c1):
+    contador = 0
+    while not c1.conjuntoVacio():
+        x = c1.elegir()
+        contador += 1
+        c1.sacar(x)
+    return contador
+
+c = Conjunto()
+c.agregar(1)
+c.agregar(90)
+c.agregar(3)
+c.agregar(10)
+c.agregar(4)
+c.agregar(2)
+
+print(cantidadElementos(c))
+#EJERCICIO 9
+con = set([1,234,45,6])
+con2 = set([1,24,45,1000])
+con3 = set([1,2,3,4,5])
+con4 = set([4,5,6,7,8])
+con5 = set([1,2,34,5,6,7,8])
+con6 = set([11,12,13,1,4,14])
+
+dict1 = {1: con, 2:con3, 3:con5}
+dict2 = {1: con2, 2:con4, 3:con6}
+
+
+#9
+def UnionDM(d1, d2):
+    res = {}
+    if len(d1)<len(d2):
+        n = len(d1)
+    else:
+        n = len(d2)
+    for i in range(1, n+1):
+        c1 = d1[i]
+        c2 = d2[i]
+        res[i] = c1.union(c2)
+    return res
+print(UnionDM(dict1, dict2))
 #Opcion 1
 
 Salas = {'PA' : 'Sala 1', 'PB' : 'Sala 2', 'JA' : 'Sala 3', 'JB': 'Sala 4',
