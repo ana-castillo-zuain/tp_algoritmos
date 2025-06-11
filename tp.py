@@ -297,6 +297,8 @@ def UnionDM(d1, d2):
         res[i] = c1.union(c2)
     return res
 print(UnionDM(dict1, dict2))
+
+
 #Opcion 1
 
 Salas = {'PA' : 'Sala 1', 'PB' : 'Sala 2', 'JA' : 'Sala 3', 'JB': 'Sala 4',
@@ -314,11 +316,13 @@ def ingresar_turno(tipo, prioridad):
 
 def mostrar_turnos():
     print('\nTurnos Programados')
+    prioridad_str = {0: 'Alta', 1: 'Baja'}
     for tipo, cola in Filas.items():
-        print('\nTipo: ' + (tipo) + ' | Sala asignada: '+ (Salas[tipo]))
+        print('\nTipo: ' + tipo + ' | Sala asignada: ' + Salas[tipo])
         while not cola.colaVacia():
             turno = cola.primero()
-            print('Turno:'+ (turno))
+            prioridad = cola.prioridad()
+            print(f'Turno: {turno} | Prioridad: {prioridad_str[prioridad]}')
             cola.desacolar()
 
 ejemplos = [
