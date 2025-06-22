@@ -179,7 +179,7 @@ cp6.acolarPrioridad(10, 1)
 cp6.acolarPrioridad(20, 3)
 cp6.acolarPrioridad(2, 30)
 
-#Ejemplo 3 -> False
+#Ejemplo 4 -> False
 
 cp7 = ColaPrioridad()
 cp8 = ColaPrioridad()
@@ -208,7 +208,7 @@ from PilaTF import Pila
 
 def eliminar_duplicados_pila(pila: Pila):
     auxiliar = Pila()
-    vistos = set()
+    vistos = Conjunto()
 
 #Recorremos la pila
 #Sacamos uno por uno los elementos de la pila original (desde el tope).
@@ -218,8 +218,8 @@ def eliminar_duplicados_pila(pila: Pila):
     while not pila.pilaVacia():
         dato = pila.tope()
         pila.desapilar()
-        if dato not in vistos:
-            vistos.add(dato)
+        if not vistos.pertenece(dato):
+            vistos.agregar(dato)
             auxiliar.apilar(dato)
 
 #Restauramos el orden original, Invertimos auxiliar usando otra pila restaurador, para dejar los elementos en orden original.
