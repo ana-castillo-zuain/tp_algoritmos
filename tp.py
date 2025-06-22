@@ -250,6 +250,103 @@ while not p.pilaVacia():
     print(p.tope())
     p.desapilar()
 
+#6
+from ColaDinamica import ColaDinamica
+def retartirColaenmitades(c):
+    M1= ColaDinamica()
+    M2= ColaDinamica()
+    
+    # contar elementos 
+    contador = 0
+    aux = ColaDinamica()
+
+    while not c.colaVacia():
+        x = c.primerElemento()
+        aux.acolar(x)
+        c.desacolar()
+        contador += 1
+
+    # Calcular la mitad
+    mitad = contador // 2
+
+    for i in range(contador):
+        x = aux.primerElemento()
+        aux.desacolar()
+        c.acolar(x)
+        if i < mitad:
+            M1.acolar(x)
+        else:
+            M2.acolar(x)
+
+    return M1, M2
+
+#Ejemplo de uso
+
+# Crear una cola original
+cola = ColaDinamica()
+for elem in [10, 20, 30, 40]:
+    cola.acolar(elem)
+
+# Usar la función
+M1, M2 = retartirColaenmitades(cola)
+
+# Mostrar resultados
+print("M1:")
+while not M1.colaVacia():
+    print(M1.primerElemento())
+    M1.desacolar()
+
+print("M2:")
+while not M2.colaVacia():
+    print(M2.primerElemento())
+    M2.desacolar()
+
+
+#7
+def conjuntos_iguales(c1, c2):
+    if c1.conjuntoVacio() and c2.conjuntoVacio():
+        return True
+
+    # Crear copias de los conjuntos originales
+    copia1 = Conjunto()
+    copia2 = Conjunto()
+
+    for i in range(c1.index):
+        copia1.agregar(c1.elementos[i])
+    for i in range(c2.index):
+        copia2.agregar(c2.elementos[i])
+
+    # Comparamos los elementos de copia1 con copia2
+    if copia1.index != copia2.index:
+        return False
+
+    iguales = True
+    for i in range(copia1.index):
+        if not copia2.pertenece(copia1.elementos[i]):
+            iguales = False
+            break
+
+    return iguales
+
+# Ejemplo de uso
+a = Conjunto()
+b = Conjunto()
+
+# Agregamos elementos
+a.agregar(1)
+a.agregar(2)
+a.agregar(3)
+a.agregar(4)
+a.agregar(5)
+a.agregar(6)
+
+b.agregar(1)
+b.agregar(2)
+b.agregar(3)
+b.agregar(4)
+b.agregar(5)
+
+print(f"7) ¿Los conjuntos son iguales?: {conjuntos_iguales(a,b)}")
 
 
 #EJERCICIO 8
@@ -297,6 +394,8 @@ def UnionDM(d1, d2):
         res[i] = c1.union(c2)
     return res
 print(UnionDM(dict1, dict2))
+
+
 #Opcion 1
 
 Salas = {'PA' : 'Sala 1', 'PB' : 'Sala 2', 'JA' : 'Sala 3', 'JB': 'Sala 4',
@@ -314,11 +413,13 @@ def ingresar_turno(tipo, prioridad):
 
 def mostrar_turnos():
     print('\nTurnos Programados')
+    prioridad_str = {0: 'Alta', 1: 'Baja'}
     for tipo, cola in Filas.items():
-        print('\nTipo: ' + (tipo) + ' | Sala asignada: '+ (Salas[tipo]))
+        print('\nTipo: ' + tipo + ' | Sala asignada: ' + Salas[tipo])
         while not cola.colaVacia():
             turno = cola.primero()
-            print('Turno:'+ (turno))
+            prioridad = cola.prioridad()
+            print(f'Turno: {turno} | Prioridad: {prioridad_str[prioridad]}')
             cola.desacolar()
 
 ejemplos = [
